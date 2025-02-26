@@ -1,0 +1,37 @@
+services:
+  postgres:
+    image: postgres:15
+    restart: always
+    container_name: hasura-postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: hasura_user
+      POSTGRES_PASSWORD: hasura_password
+      POSTGRES_DB: hasura_db
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  hasura:
+    image: hasura/graphql-engine:v2.38.0
+    restart: always
+    container_name: hasura-engine
+    ports:
+      - "8000:8080"
+    depends_on:
+      - postgres
+    environment:
+      HASURA_GRAPHQL_DATABASE_URL: postgres://hasura_user:hasura_password@postgres:5432/hasura_db
+      HASURA_GRAPHQL_ENABLE_CONSOLE: "true"
+      HASURA_GRAPHQL_ADMIN_SECRET: MinabTechProject
+      HASURA_GRAPHQL_UNAUTHORIZED_ROLE: public
+
+  golang-app: 
+    build: ./food-recipe 
+    container_name: food-recipe
+    ports:
+      - "8000:8080"
+    depends_on:
+      - postgres
+volumes:
+  postgres_data:

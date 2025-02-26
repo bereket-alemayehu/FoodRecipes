@@ -1,0 +1,8 @@
+{
+    "editor.defaultFormatter": "bradlc.vscode-tailwindcss",
+    "notebook.defaultFormatter": "bradlc.vscode-tailwindcss",
+    "workbench.settings.useSplitJSON": false,
+    "json.schemas": [
+        
+    ]
+}
