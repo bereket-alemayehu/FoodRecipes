@@ -1,8 +1,8 @@
 services:
   postgres:
-    image: postgres:15
+    image: postgres:13
     restart: always
-    container_name: hasura-postgres
+    container_name: postgres
     ports:
       - "5432:5432"
     environment:
@@ -26,12 +26,17 @@ services:
       HASURA_GRAPHQL_ADMIN_SECRET: MinabTechProject
       HASURA_GRAPHQL_UNAUTHORIZED_ROLE: public
 
-  golang-app: 
-    build: ./food-recipe 
+  golang-app:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
     container_name: food-recipe
     ports:
-      - "8000:8080"
-    depends_on:
-      - postgres
+      - "7000:8081"
+    environment:
+      - PORT=8081
+      - DATABASE_URL=postgres://hasura_user:hasura_password@postgres:5432/hasura_db
+      - HASURA_GRAPHQL_ENDPOINT=http://hasura-engine:8080/v1/graphql
+
 volumes:
   postgres_data:
