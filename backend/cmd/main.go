@@ -2,18 +2,24 @@ package main
 
 import (
 	"fmt"
-	"food-recipes/backend/internal/actions"
 	"net/http"
 	"os"
 	"strconv"
+
+	"github.com/bereket-alemayehu/food-recipes/backend/internal/actions"
 )
 
 func main() {
-    http.HandleFunc("/signup", actions.SignupHandler)
     http.HandleFunc("/login", actions.LoginHandler)
-    http.HandleFunc("/recipes", actions.CreateRecipeHandler)
-    http.HandleFunc("/recipes/update", actions.UpdateRecipeHandler)
-    http.HandleFunc("/recipes/delete", actions.DeleteRecipeHandler)
+    http.HandleFunc("/signup", actions.SignupHandler)
+    http.HandleFunc("/create-recipe", actions.CreateRecipeHandler)
+    http.HandleFunc("/update-recipe", actions.UpdateRecipeHandler)
+    http.HandleFunc("/delete-recipe", actions.DeleteRecipeHandler)
+    http.HandleFunc("/like-recipe", actions.LikeRecipeHandler)
+    http.HandleFunc("/rate-recipe", actions.RateRecipeHandler)
+    http.HandleFunc("/comment-recipe", actions.CommentRecipeHandler)
+    http.HandleFunc("/bookmark-recipe", actions.BookmarkRecipeHandler)
+    http.HandleFunc("/buy-recipe", actions.BuyRecipeHandler)
     http.HandleFunc("/upload", actions.UploadFileHandler)
 
     portStr := os.Getenv("PORT")
