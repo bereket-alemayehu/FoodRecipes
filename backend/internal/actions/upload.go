@@ -1,11 +1,11 @@
 package actions
 
 import (
-    "fmt"
-    "io"
-    "net/http"
-    "os"
-    "path/filepath"
+	"fmt"
+	"io"
+	"net/http"
+	"os"
+	"path/filepath"
 )
 
 func UploadFileHandler(w http.ResponseWriter, r *http.Request) {

@@ -2,11 +2,10 @@ package main
 
 import (
 	"fmt"
+	"food-recipes/backend/internal/actions"
 	"net/http"
 	"os"
 	"strconv"
-
-	"github.com/bereket-alemayehu/food-recipes/backend/internal/actions"
 )
 
 func main() {
